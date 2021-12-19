@@ -1,0 +1,45 @@
+.header {
+  --vertical-padding: 2rem;
+  --header-height-without-padding: calc(var(--header-height) - var(--vertical-padding) * 2);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  width: 100%;
+  height: var(--header-height);
+  padding: var(--vertical-padding) 5rem;
+  background-color: var(--primary-color);
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.3);
+
+  &-title {
+    &,
+    & a {
+      display: inline-block;
+    }
+    a img {
+      width: 20rem;
+      height: var(--header-height-without-padding);
+    }
+  }
+  .nav {
+    float: right;
+    &-item {
+      display: inline-block;
+      &:not(:first-child):before {
+        content: '';
+        display: inline-block;
+        width: 2px;
+        height: 20px;
+        margin: 0 2rem;
+        background-color: #fff;
+        vertical-align: -0.2rem;
+      }
+      a {
+        display: inline-block;
+        font-size: 2rem;
+        color: #fff;
+        line-height: var(--header-height-without-padding);
+      }
+    }
+  }
+}

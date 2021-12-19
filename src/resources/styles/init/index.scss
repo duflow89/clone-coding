@@ -1,0 +1,17 @@
+@use 'sass:color';
+@use 'reset';
+
+$_primary-color: #e2583e;
+$_primary-color-active: color.adjust($_primary-color, $lightness: -10%);
+
+:root {
+  --primary-color: #{$_primary-color};
+  --primary-color-active: #{$_primary-color-active};
+  --black-color: #323d45;
+
+  --border-radius: 0.5rem;
+
+  --header-height: 9rem;
+  --footer-height: 8rem;
+  --horizontal-padding: 5rem;
+}
