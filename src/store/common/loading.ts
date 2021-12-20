@@ -21,8 +21,9 @@ const { actions, reducer } = createSlice({
       state.loadingActionList.push(payload);
     },
     endLoading(state, { payload }: PayloadAction<string>) {
+      console.log(payload);
       state.loadingCount -= 1;
-      state.loadingActionList = state.loadingActionList.filter((type) => type === payload);
+      state.loadingActionList = state.loadingActionList.filter((type) => type !== payload);
     },
     clearLoading(state) {
       state.loadingCount = 0;
