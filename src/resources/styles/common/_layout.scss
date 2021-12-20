@@ -1,13 +1,13 @@
 .wrap {
   height: 100%;
   padding-top: var(--header-height);
+  min-height: 60rem;
 }
 
 .container {
   max-width: 1600px;
   margin: auto;
   padding: 6rem var(--horizontal-padding) 5rem;
-  min-height: 500px;
   min-height: calc(100% - var(--footer-height));
 }
 
@@ -31,5 +31,21 @@
   }
   &-info {
     font-size: 2rem;
+    word-break: keep-all;
+  }
+}
+
+.empty-list {
+  padding: 8rem 0;
+  border: 1px solid #c2c2c2;
+  border-radius: var(--border-radius);
+  font-size: 1.8rem;
+  text-align: center;
+  color: #939fa5;
+}
+
+@media all and (max-width: 767px) {
+  .container {
+    padding-top: 3rem;
   }
 }

@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { requestActions, requestListSelector } from '~/store/client/request';
-import { ApiLoading } from '~/components/common/Loading';
+import Loading from '~/components/common/Loading';
+import { loadingTypeListSelector } from '~/store/common/loading';
 import SearchFilter from './SearchFilter';
 import RequestItem from './RequestItem';
 
@@ -10,6 +11,10 @@ const Request = () => {
   const { getRequestListAsync } = requestActions;
 
   const requestList = useSelector(requestListSelector);
+  const loadingTypeList = useSelector(loadingTypeListSelector);
+
+  const isLoading = loadingTypeList.includes(getRequestListAsync.index.type);
+  const isEmptyList = !requestList.length;
 
   useEffect(() => {
     dispatch(getRequestListAsync.index());
@@ -25,12 +30,19 @@ const Request = () => {
       <div className='request'>
         <SearchFilter />
 
-        <ApiLoading actionType={getRequestListAsync.index.type} />
+        {!isEmptyList && (
+          <div className='request-list'>
+            {requestList.map((item) => (
+              <RequestItem item={item} key={item.id} />
+            ))}
+          </div>
+        )}
 
-        <div className='request-list'>
-          {requestList.length > 0 &&
-            requestList.map((item) => <RequestItem item={item} key={item.id} />)}
-        </div>
+        {!isLoading && isEmptyList && (
+          <div className='empty-list'>조건에 맞는 견적 요청이 없습니다.</div>
+        )}
+
+        <Loading isLoading={isLoading} />
       </div>
     </>
   );

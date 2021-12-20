@@ -4,8 +4,11 @@
   &-top {
     margin-bottom: 4rem;
   }
-  .select:not(:first-child) {
-    margin-left: 1rem;
+  .filter-select {
+    margin-right: 1rem;
+  }
+  .filter-toggle {
+    float: right;
   }
   &-list {
     display: -ms-grid;
@@ -82,6 +85,29 @@
     }
     a:not(:first-child) {
       margin-left: 1rem;
+    }
+  }
+}
+
+@media all and (max-width: 1024px) {
+  .request {
+    &-list {
+      -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+}
+
+@media all and (max-width: 767px) {
+  .request {
+    .filter-toggle {
+      display: block;
+      float: initial;
+      margin-top: 2rem;
+    }
+    &-list {
+      -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
     }
   }
 }

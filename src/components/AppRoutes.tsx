@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import Request from './Client/Request';
+import Request from './client/Request';
 
 const AppRoutes = () => (
   <Routes>

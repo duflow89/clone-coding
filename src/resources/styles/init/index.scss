@@ -2,11 +2,13 @@
 @use 'reset';
 
 $_primary-color: #e2583e;
-$_primary-color-active: color.adjust($_primary-color, $lightness: -10%);
+$_primary-color-darken: color.adjust($_primary-color, $lightness: -10%);
+$_primary-color-lighten: color.adjust($_primary-color, $lightness: 20%);
 
 :root {
   --primary-color: #{$_primary-color};
-  --primary-color-active: #{$_primary-color-active};
+  --primary-color-darken: #{$_primary-color-darken};
+  --primary-color-lighten: #{$_primary-color-lighten};
   --black-color: #323d45;
 
   --border-radius: 0.5rem;
@@ -14,4 +16,25 @@ $_primary-color-active: color.adjust($_primary-color, $lightness: -10%);
   --header-height: 9rem;
   --footer-height: 8rem;
   --horizontal-padding: 5rem;
+
+  --font-size: 10px;
+}
+
+@media all and (max-width: 1024px) {
+  :root {
+    --header-height: 6rem;
+    --horizontal-padding: 2rem;
+  }
+}
+
+@media all and (max-width: 425px) {
+  :root {
+    --font-size: 8px;
+  }
+}
+
+@media all and (max-width: 375px) {
+  :root {
+    --horizontal-padding: 1.5rem;
+  }
 }

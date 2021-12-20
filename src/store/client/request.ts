@@ -21,9 +21,11 @@ export const requestActions = {
   ),
   setMaterial: createAction<SearchFilterAction<MaterialType>>(`${TYPE}/setMaterial`),
   setHiddenWaiting: createAction<boolean>(`${TYPE}/setHiddenWaiting`),
+  resetFilterList: createAction(`${TYPE}/resetFilterList`),
 };
 
-const { getRequestListAsync, setMachiningMethod, setMaterial, setHiddenWaiting } = requestActions;
+const { getRequestListAsync, setMachiningMethod, setMaterial, setHiddenWaiting, resetFilterList } =
+  requestActions;
 
 export interface RequestInitState {
   list: RequestType[];
@@ -71,11 +73,14 @@ export const requestReducer = createReducer(requestInitState, (builder) =>
     })
     .addCase(setHiddenWaiting, (state, { payload }) => {
       state.searchFilter.isHiddenWaiting = payload;
+    })
+    .addCase(resetFilterList, (state) => {
+      state.searchFilter.machiningMethodList = [];
+      state.searchFilter.materialList = [];
     }),
 );
 
 export const requestSelector = (state: RootState) => state.client;
-
 export const requestListSelector = createSelector([requestSelector], ({ request }) => {
   const { machiningMethodList, materialList, isHiddenWaiting } = request.searchFilter;
   let filteredRequestList = request.list;
@@ -91,10 +96,14 @@ export const requestListSelector = createSelector([requestSelector], ({ request 
     );
 
   if (isHiddenWaiting)
-    filteredRequestList = filteredRequestList.filter((item) => item.status === REQUEST_STATUS.WAIT);
+    filteredRequestList = filteredRequestList.filter((item) => item.status !== REQUEST_STATUS.WAIT);
 
   return filteredRequestList;
 });
+export const requestFilterSelector = createSelector(
+  [requestSelector],
+  ({ request }) => request.searchFilter,
+);
 
 export function* getRequestListAsyncSaga() {
   try {
